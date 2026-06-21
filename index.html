@@ -1,0 +1,709 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Samyak Banerjee Portfolio</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@300;400;500;600&family=Caveat:wght@400;600&display=swap');
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --sky-top: #87CEEB;
+    --sky-mid: #A8D8EA;
+    --sky-low: #C8E8F0;
+    --sea: #5B9EBD;
+    --dark: #111111;
+    --white: #FFFFFF;
+    --cream: #F5F2EC;
+    --mist: rgba(255,255,255,0.18);
+    --card-bg: rgba(255,255,255,0.92);
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background: linear-gradient(180deg, var(--sky-top) 0%, var(--sky-mid) 45%, var(--sky-low) 65%, #9AC4B8 80%, #6B9E8A 92%, #4A7A60 100%);
+    min-height: 100vh;
+    color: var(--dark);
+    overflow-x: hidden;
+    position: relative;
+  }
+
+  /* Coastal landscape elements */
+  body::before {
+    content: '';
+    position: fixed;
+    bottom: 0; left: 0; right: 0;
+    height: 35vh;
+    background: linear-gradient(180deg, transparent 0%, rgba(74,112,85,0.3) 40%, #3D6B4A 70%, #2D5238 100%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* Rocky cliffs SVG */
+  .cliffs {
+    position: fixed;
+    bottom: 0; right: 0;
+    width: 45vw;
+    height: 40vh;
+    z-index: 1;
+    pointer-events: none;
+  }
+
+  /* Nav */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    justify-content: center;
+    gap: 60px;
+    padding: 22px 40px;
+    background: linear-gradient(180deg, rgba(135,206,235,0.7) 0%, transparent 100%);
+  }
+
+  nav a {
+    font-family: 'Anton', sans-serif;
+    font-size: 13px;
+    letter-spacing: 3px;
+    color: var(--white);
+    text-decoration: none;
+    text-shadow: 0 1px 4px rgba(0,0,0,0.3);
+    transition: opacity 0.2s;
+  }
+  nav a:hover { opacity: 0.7; }
+
+  /* Hero */
+  .hero {
+    position: relative;
+    z-index: 10;
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    padding: 0 40px;
+    gap: 20px;
+  }
+
+  .hero-left {
+    font-family: 'Anton', sans-serif;
+    font-size: clamp(60px, 9vw, 130px);
+    line-height: 0.95;
+    color: var(--dark);
+    text-align: left;
+  }
+
+  .hero-right {
+    font-family: 'Anton', sans-serif;
+    font-size: clamp(60px, 9vw, 130px);
+    line-height: 0.95;
+    color: var(--dark);
+    text-align: right;
+  }
+
+  /* Hero photo card */
+  .hero-center-wrap {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0;
+  }
+
+  .hero-center {
+  width: clamp(220px, 24vw, 340px);
+  background: var(--card-bg);
+  padding: 14px 14px 40px;
+  box-shadow: 0 8px 40px rgba(0,0,0,0.22), 0 2px 8px rgba(0,0,0,0.12);
+  position: relative;
+}
+	
+  .hero-center::before {
+    content: '';
+    position: absolute;
+    top: -8px; left: 50%; transform: translateX(-50%);
+    width: 20px; height: 20px;
+    background: #D8CFC0;
+    border-radius: 50%;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+  }
+
+  .hero-photo {
+    width: 100%;
+	width: calc(100% + 28px)
+	height: 100%
+    aspect-ratio: 3/4;
+    object-fit: cover;
+	object-position: center top
+    display: block;
+    background: #c9e0ee;
+	margin: 0 -14px
+    /* cat placeholder via CSS */
+  }
+
+  .hero-photo-placeholder {
+  width: 100%;
+  aspect-ratio: 3/4;
+  overflow: hidden;
+  background: linear-gradient(160deg, #b0d8ee 0%, #87CEEB 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 80px;
+  user-select: none;
+}
+	
+
+  .portfolio-label {
+    font-family: 'Anton', sans-serif;
+    font-size: clamp(28px, 4vw, 52px);
+    color: var(--white);
+    letter-spacing: 4px;
+    text-shadow: 0 2px 12px rgba(0,0,0,0.2);
+    margin-top: 18px;
+    text-align: center;
+  }
+
+  /* About section layout */
+  .about-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    align-items: start;
+  }
+
+  .about-left .section-header { margin-bottom: 0; }
+
+  .about-info-card {
+    background: var(--card-bg);
+    padding: 30px 28px;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.14);
+    position: relative;
+    margin-top: 10px;
+  }
+
+  .about-info-card::before {
+    content: '';
+    position: absolute;
+    top: -7px; left: 50%; transform: translateX(-50%);
+    width: 16px; height: 16px;
+    background: #D8CFC0;
+    border-radius: 50%;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.18);
+  }
+  .hero-photo-placeholder img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center top;
+    display: block;
+}
+
+  .tagline {
+    font-size: 11px;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: var(--sea);
+    margin-bottom: 10px;
+    font-weight: 600;
+  }
+
+  .hero-name-small {
+    font-family: 'Anton', sans-serif;
+    font-size: 22px;
+    margin-bottom: 14px;
+    line-height: 1;
+  }
+
+  .hero-bio {
+    font-size: 12.5px;
+    line-height: 1.7;
+    color: #333;
+    margin-bottom: 18px;
+  }
+
+  .contact-strip {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    border-top: 1px solid #E0D8D0;
+    padding-top: 14px;
+  }
+
+  .contact-strip a {
+    font-size: 11.5px;
+    color: #555;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .contact-strip a:hover { color: var(--sea); }
+
+  /* Sections */
+  section {
+    position: relative;
+    z-index: 10;
+    max-width: 1100px;
+    margin: 0 auto 80px;
+    padding: 0 40px;
+  }
+
+  .section-header {
+    font-family: 'Anton', sans-serif;
+    font-size: clamp(42px, 7vw, 90px);
+    color: var(--white);
+    text-shadow: 0 2px 20px rgba(0,0,0,0.15);
+    margin-bottom: 36px;
+    letter-spacing: 1px;
+  }
+
+  /* Polaroid cards */
+  .cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 24px;
+  }
+
+  .card {
+    background: var(--card-bg);
+    padding: 28px 26px 26px;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.14), 0 1px 4px rgba(0,0,0,0.08);
+    position: relative;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+  }
+
+  .card:hover {
+    transform: translateY(-4px) rotate(0.3deg);
+    box-shadow: 0 12px 40px rgba(0,0,0,0.18);
+  }
+
+  .card::before {
+    content: '';
+    position: absolute;
+    top: -7px; left: 50%; transform: translateX(-50%);
+    width: 16px; height: 16px;
+    background: #D8CFC0;
+    border-radius: 50%;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.18);
+  }
+
+  .card-org {
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--sea);
+    font-weight: 600;
+    margin-bottom: 6px;
+  }
+
+  .card-title {
+    font-family: 'Inter', sans-serif;
+    font-weight: 700;
+    font-size: 15px;
+    margin-bottom: 6px;
+    line-height: 1.3;
+  }
+
+  .card-period {
+    font-size: 11px;
+    color: #888;
+    margin-bottom: 12px;
+    font-style: italic;
+  }
+
+  .card-desc {
+    font-size: 12.5px;
+    line-height: 1.7;
+    color: #444;
+  }
+
+  /* Education card special */
+  .edu-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+  }
+
+  /* Skills & Languages */
+  .skills-langs-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    margin-top: 36px;
+  }
+
+  .lang-tag {
+    background: linear-gradient(135deg, #d4e8c2, #b8d9a0);
+    color: var(--dark);
+    font-size: 11.5px;
+    font-weight: 600;
+    padding: 6px 14px;
+    letter-spacing: 0.5px;
+  }
+
+  .lang-level {
+    font-size: 10px;
+    font-weight: 400;
+    opacity: 0.7;
+    margin-left: 3px;
+  }
+
+  /* Skills */
+  .skills-card {
+    background: var(--card-bg);
+    padding: 28px;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.14);
+    position: relative;
+  }
+
+  .skills-card::before {
+    content: '';
+    position: absolute;
+    top: -7px; left: 50%; transform: translateX(-50%);
+    width: 16px; height: 16px;
+    background: #D8CFC0;
+    border-radius: 50%;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.18);
+  }
+
+  .skills-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 14px;
+  }
+
+  .skill-tag {
+    background: linear-gradient(135deg, var(--sky-mid), var(--sky-top));
+    color: var(--dark);
+    font-size: 11.5px;
+    font-weight: 600;
+    padding: 6px 14px;
+    letter-spacing: 0.5px;
+  }
+
+  /* Publications */
+  .pub-card {
+    background: var(--card-bg);
+    padding: 20px 24px;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.14);
+    border-left: 3px solid var(--sea);
+    margin-bottom: 14px;
+    transition: transform 0.2s;
+  }
+  .pub-card:hover { transform: translateX(4px); }
+
+  .pub-title {
+    font-weight: 600;
+    font-size: 13.5px;
+    margin-bottom: 4px;
+    line-height: 2.4;
+  }
+
+  .pub-meta {
+    font-size: 11px;
+    color: #777;
+    letter-spacing: 0.5px;
+  }
+
+  /* Contact */
+  .contact-big {
+    background: var(--card-bg);
+    padding: 40px;
+    box-shadow: 0 8px 40px rgba(0,0,0,0.15);
+    position: relative;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    align-items: center;
+  }
+
+  .contact-big::before {
+    content: '';
+    position: absolute;
+    top: -7px; left: 50%; transform: translateX(-50%);
+    width: 16px; height: 16px;
+    background: #D8CFC0;
+    border-radius: 50%;
+  }
+
+  .reach-out-text {
+    font-family: 'Anton', sans-serif;
+    font-size: clamp(40px, 5vw, 72px);
+    line-height: 0.95;
+    color: var(--dark);
+  }
+
+  .contact-list { display: flex; flex-direction: column; gap: 20px; }
+
+  .contact-item-label {
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--sea);
+    font-weight: 700;
+    margin-bottom: 3px;
+  }
+
+  .contact-item-value {
+    font-size: 14px;
+    color: #222;
+    font-weight: 500;
+  }
+
+  .handwriting {
+    font-family: 'Caveat', cursive;
+    font-size: 20px;
+    color: #555;
+    margin-top: 12px;
+  }
+
+  /* Footer */
+  footer {
+    position: relative;
+    z-index: 10;
+    text-align: center;
+    padding: 30px 40px 50px;
+    font-size: 11px;
+    color: rgba(255,255,255,0.7);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+  }
+  <title>Font Awesome Icons</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+   <h1>fa fa-linkedin-square</h1>
+
+	<i class="fa fa-linkedin-square"></i>
+	<i class="fa fa-linkedin-square" style="font-size:24px"></i>
+	<i class="fa fa-linkedin-square" style="font-size:36px"></i>
+	<i class="fa fa-linkedin-square" style="font-size:48px;color:red"></i>
+<br>
+
+<p>Used on a button:</p>
+<button style="font-size:24px">Button <i class="fa fa-linkedin-square"></i></button>
+
+<p>Unicode:</p>
+<i style="font-size:24px" class="fa">&#xf08c;</i>
+
+
+  @media (max-width: 768px) {
+    .hero { grid-template-columns: 1fr; justify-items: center; padding-top: 80px; }
+    .hero-left, .hero-right { font-size: 48px; text-align: center; }
+    .edu-grid, .contact-big, .about-layout, .skills-langs-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- Coastal cliffs SVG -->
+<svg class="cliffs" viewBox="0 0 500 300" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMaxYMax meet">
+  <path d="M280,300 L280,180 Q290,160 310,155 Q330,150 340,130 Q350,110 370,120 L370,300Z" fill="#5A8A6A" opacity="0.9"/>
+  <path d="M350,300 L350,140 Q360,120 380,110 Q400,100 410,80 Q420,60 445,70 Q460,55 470,75 L500,70 L500,300Z" fill="#4A7A5A" opacity="0.95"/>
+  <path d="M430,300 L430,170 Q445,155 465,150 Q480,145 490,130 L500,125 L500,300Z" fill="#3D6B4A" opacity="0.8"/>
+  <!-- Sea stacks -->
+  <ellipse cx="230" cy="260" rx="12" ry="20" fill="#5A8A6A" opacity="0.7"/>
+  <ellipse cx="255" cy="270" rx="8" ry="14" fill="#4A7A5A" opacity="0.65"/>
+</svg>
+
+<!-- Navigation -->
+<nav>
+  <a href="#about-section">ABOUT ME</a>
+  <a href="#education">EDUCATION</a>
+  <a href="#experience">EXPERIENCE</a>
+  <a href="#research">RESEARCH</a>
+  <a href="#contact">CONTACT</a>
+</nav>
+
+<!-- Hero -->
+<div class="hero" id="about">
+  <div class="hero-left">SAMYAK</div>
+
+  <div class="hero-center-wrap">
+    <div class="hero-center" style="transform: rotate(-1.5deg)">
+      <div class="hero-photo-placeholder">
+  <img src="download (5).jpg">
+</div>
+    </div>
+    <div class="portfolio-label">PORTFOLIO</div>
+  </div>
+
+  <div class="hero-right">BANERJEE</div>
+</div>
+
+<!-- About Me -->
+<section id="about-section">
+  <div class="about-layout">
+    <div class="about-left">
+      <div class="section-header">ABOUT ME</div>
+    </div>
+    <div class="about-info-card" style="transform: rotate(1deg)">
+      <div class="tagline">Researcher · Writer · Analyst</div>
+      <div class="hero-name-small">Hi I'm Samyak Rachit Banerjee!</div>
+      <p class="hero-bio">
+        I'm currently a Master's student at NTU and graduate of Diplomacy &amp; Foreign Policy from OPJGU. 
+        Specialising in Indo-Pacific security, Chinese foreign policy, and maritime strategy.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- My Journey / Education -->
+<section id="education">
+  <div class="section-header">MY JOURNEY</div>
+  <div class="edu-grid" style="grid-template-columns: repeat(2, 1fr);">
+    <div class="card" style="transform: rotate(-1deg)">
+      <div class="card-org">BACHELOR OF ARTS (Hons) IN Diplomacy &amp; Foreign Policy</div>
+      <div class="card-title">Jindal School of International Affairs (JSIS), OP Jindal Global University (OPJGU)</div>
+      <div class="card-period">Sep 2022 – Jul 2025 · CGPA 7.62 / 8 · INDIA</div>
+      <p class="card-desc"> <B> Bronze Medal · Best All-Rounder · Outstanding Academic Performance </B> </p>
+	  <p class="card-desc"> Relevant Courses: War Peace and Diplomacy; Defence, National Security & Foreign Policy; Indian Foreign Policy in a Changing World; Chinese Foreign Policy; Asian Security Architecture </p>
+	  <p class="card-desc"> <b> Vouluntered </b> as Election Commissioner &amp; for the Gender Sensitization Committee</p>
+    </div>
+    <div class="card" style="transform: rotate(1deg)">
+      <div class="card-org">MASTER OF SCIENCE IN Strategic Studies</div>
+      <div class="card-title">S. Rajaratnam School of International Studies (RSIS), Nanyang Technological University (NTU) </div>
+      <div class="card-period">July 2026 - June 2027 · Singapore</div>
+      <p class="card-desc">Focused on strategic and security studies in the Asia-Pacific context.</p>
+    </div>
+  </div>
+</section>
+
+<!-- Experience -->
+<section id="experience">
+  <div class="section-header">EXPERIENCE</div>
+  <div class="cards-grid">
+	<div class="card" style="transform: rotate(-0.8deg)">
+      <div class="card-org">The Indian Netizens</div>
+      <div class="card-title">Content Writer</div>
+      <div class="card-period">April 2026 – Present</div>
+      <p class="card-desc">Content Writer for the Security and Defence Research cluster of The Indian Netizens.</p>
+    </div>
+  
+    <div class="card" style="transform: rotate(0deg)">
+      <div class="card-org">Centre for Security Studies, JGU</div>
+      <div class="card-title">Senior Research Analyst</div>
+      <div class="card-period">Mar 2023 – May 2025</div>
+      <p class="card-desc">Progressed from intern to Senior Analyst. Mentored interns on research methodology, reviewed drafts, and published an issue titled "Delhi's Strategic Investment in the Indian Ocean." Presented at dialogue on Small Island Nations in the Indo-Pacific.</p>
+    </div>
+    <div class="card" style="transform: rotate(1.1deg)">
+      <div class="card-org">Centre for North East Asian Studies, JSIA</div>
+      <div class="card-title">Publications Coordinator, Editor</div>
+      <div class="card-period">Apr 2023 – Jul 2025</div>
+      <p class="card-desc">Led a 20-member China research cluster, managed publication databases, designed writing workshops. Published briefs on India–Tibet relations, China's One Child Policy, and the Chinese Social Credit System.</p>
+    </div>
+	
+	<div class="card" style="transform: rotate(-0.8deg)">
+      <div class="card-org">Jindal India Institute </div>
+      <div class="card-title">Intern</div>
+      <div class="card-period">February 2024 – January 2024</div>
+      <p class="card-desc">Supported the planning and execution of academic conferences, logistics, communications, and stakeholder engagement to ensure smooth and effective event delivery..</p>
+    </div>
+	
+    <div class="card" style="transform: rotate(0deg)">
+      <div class="card-org">Centre for New Economic Studies &amp; Jindal India Institute</div>
+      <div class="card-title">Columnist for IR Cluster </div>
+      <div class="card-period">Jan 2024 – June 2024</div>
+      <p class="card-desc">Contributed analytical articles on India–ASEAN relations, India's military-industrial ecosystem, and the India–Middle East–Europe Economic Corridor. Supported planning and logistics for academic conferences.</p>
+    </div>
+	
+	 <div class="card" style="transform: rotate(1.1deg)">
+      <div class="card-org">Raisina House</div>
+      <div class="card-title">Research Intern</div>
+      <div class="card-period">December 2023 – Jan 2024</div>
+      <p class="card-desc"> Researched &amp; authored a published paper analysing India’s Evolving Maritime Strategy with a focus on strategic priorities, regional dynamics, and policy implications.</p>
+    </div>
+	
+	<div class="card" style="transform: rotate(-0.8deg)">
+      <div class="card-org">Borderman</div>
+      <div class="card-title">Research Intern</div>
+      <div class="card-period">June 2024 – September 2024</div>
+      <p class="card-desc"> Authored and published analytical pieces on regional security and a blog examining the complexities &amp; policy responses surrounding border security </p>
+    </div>
+  </div>
+</section>
+
+<!-- Research / Publications -->
+<section id="research">
+  <div class="section-header">RESEARCH</div>
+  <div class="pub-card">
+    <div class="pub-title"> <a href="https://raisinahouse.org/publications/f/indias-evolving-maritime-approach-in-the-indian-ocean-region"> India's Evolving Maritime Approach in the Indian Ocean Region </a></div> 
+    <div class="pub-meta">Raisina House · February 2024</div>
+  </div>
+  <div class="pub-card">
+    <div class="pub-title"> <a href="https://nickledanddimed.com/2024/03/12/fortifying-india-asean-relations-a-strategic-perspective/"> Fortifying India–ASEAN Relations: A Strategic Perspective </a> </div>
+    <div class="pub-meta">Centre for New Economic Studies · Nickeled and Dimed · March 2024</div>
+  </div>
+  <div class="pub-card">
+    <div class="pub-title"> <a href="https://nickledanddimed.com/2024/12/15/the-complexity-of-indias-military-industrial-complex/"> The Complexity of India's Military-Industrial Complex</a> </div>
+    <div class="pub-meta">Centre for New Economic Studies · Nickeled and Dimed · December 2024</div>
+  </div>
+  <div class="pub-card">
+    <div class="pub-title">India–China–Japan: The Bermuda Triangle of Diplomacy</div>
+    <div class="pub-meta">Centre for North East Asian Studies, JSIA</div>
+  </div>
+
+  <div class="skills-langs-grid">
+    <div class="skills-card">
+      <div class="card-org">Skills</div>
+      <div class="skills-grid">
+        <span class="skill-tag">Research</span>
+        <span class="skill-tag">Academic Writing</span>
+        <span class="skill-tag">Editing</span>
+        <span class="skill-tag">Database Management</span>
+        <span class="skill-tag">Event Planning</span>
+        <span class="skill-tag">Communication</span>
+        <span class="skill-tag">Indo-Pacific Security</span>
+        <span class="skill-tag">Chinese Foreign Policy</span>
+      </div>
+    </div>
+    <div class="skills-card">
+      <div class="card-org">Languages</div>
+      <div class="skills-grid">
+        <span class="lang-tag">Bengali <span class="lang-level">Native</span></span>
+        <span class="lang-tag">English <span class="lang-level">Fluent</span></span>
+        <span class="lang-tag">Hindi <span class="lang-level">Fluent</span></span>
+        <span class="lang-tag">German <span class="lang-level">A1</span></span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Contact -->
+<section id="contact">
+  <div class="contact-big">
+    <div>
+      <div class="reach-out-text">REACH<br>OUT</div>
+      <div class="handwriting">let's connect ✦</div>
+    </div>
+    <div class="contact-list">
+      <div>
+        <div class="contact-item-label">Email</div>
+        <div class="contact-item-value"><a href="mailto:samyak.r.banerjee@gmail.com">✉ samyak.r.banerjee@gmail.com</a> </div>
+      </div>
+      <div>
+        <div class="contact-item-label">Phone</div>
+        <div class="contact-item-value"><a href="tel:+916001620487">☎ +91 600 162 0487</a> </div>
+      </div>
+      <div>
+        <div class="contact-item-label">Research Interests</div>
+        <div class="contact-item-value">Politics · Policymaking · Security · Indo-Pacific</div>
+      </div>
+      <div>
+        <a href="https://www.linkedin.com/in/samyak-rachit-banerjee/" target="_blank">
+		<div  class="fa fa-linkedin-square"> </div>
+        <div class="contact-item-value"> </div>
+<!-- Add icon library -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>© 2026 Samyak Rachit Banerjee · Diplomacy &amp; Foreign Policy</footer>
+
+</body>
+</html>
